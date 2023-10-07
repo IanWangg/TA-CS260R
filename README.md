@@ -5,18 +5,17 @@
 * Download and install Anaconda [here](https://www.anaconda.com/download)
 * Install OpenAI gym
 ```
-pip install gym[all]==0.18.0
+pip install gymnasium[atari, accept-rom-license]
 ```
 
 ## Examples
 
 * Play with the environment
 ```
-import gym
-env = gym.make('CartPole-v0')
-env.reset()
+import gymnasium as gym
+env = gym.make('CartPole-v0', render_mode='human')
+env.reset(seed=0)
 for _ in range(1000):
-    env.render()
     env.step(env.action_space.sample()) # take a random action
 env.close()
 ```
@@ -24,7 +23,7 @@ env.close()
 * Random play with ```CartPole-v0```
 
 ```
-import gym
+import gymnasium as gym
 env = gym.make('CartPole-v0')
 for i_episode in range(20):
     observation = env.reset()
