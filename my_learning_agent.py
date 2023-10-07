@@ -40,7 +40,7 @@ def do_rollout(agent, env, num_steps, render=False):
         (ob, reward, terminated, truncated, _info) = env.step(a)
         done = np.logical_or(terminated, truncated) # here use the logical or, one can use terminal
         total_rew += reward
-        if render and t%3==0: env.render()
+        # if render and t%3==0: env.render()
         if done: break
     return total_rew, t+1
 
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     parser.add_argument('target', nargs="?", default="CartPole-v0")
     args = parser.parse_args()
 
-    env = gym.make(args.target, render_mode='rbg_array')
+    env = gym.make(args.target, render_mode='human')
     np.random.seed(0)
     params = dict(n_iter=100, batch_size=10, elite_frac = 0.2)
     num_steps = 200

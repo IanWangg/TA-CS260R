@@ -1,19 +1,23 @@
 # Some basic examples for reinforcement learning
 
-## Installing Anaconda and OpenAI gym
+## Installing Anaconda and Gymnasium
 
 * Download and install Anaconda [here](https://www.anaconda.com/download)
-* Install OpenAI gym
+* Install Gymnasium
 ```
-pip install gymnasium[atari, accept-rom-license]
+pip install gymnasium[all]
 ```
 
 ## Examples
 
-* Play with the environment
+* Play with the environment and visualize the agent behaviour
 ```
 import gymnasium as gym
-env = gym.make('CartPole-v0', render_mode='human')
+render = True # switch if visualize the agent
+if render:
+    env = gym.make('CartPole-v0', render_mode='human')
+else:
+    env = gym.make('CartPole-v0')
 env.reset(seed=0)
 for _ in range(1000):
     env.step(env.action_space.sample()) # take a random action
@@ -28,10 +32,10 @@ env = gym.make('CartPole-v0')
 for i_episode in range(20):
     observation = env.reset()
     for t in range(100):
-        env.render()
         print(observation)
         action = env.action_space.sample()
-        observation, reward, done, info = env.step(action)
+        observation, reward, terminated, truncated, info = env.step(action)
+        done = np.logical_or(terminated, truncated)
 env.close()
 ```
 

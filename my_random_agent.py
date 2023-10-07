@@ -40,13 +40,13 @@ if __name__ == '__main__':
     for i_episode in range(num_episodes):
         observation, _ = env.reset()
         for t in range(num_maxstep):
-            env.render()
+            # env.render()
             action = agent.act(observation, reward, done)
             observation, reward, terminated, truncated, info = env.step(action)
             done = np.logical_or(terminated, truncated)
             print('episode {}-step {}, taking action {}, observation {}'.format(i_episode, t, action, observation))
         
-        env.close()
+    env.close()
 
 
 
